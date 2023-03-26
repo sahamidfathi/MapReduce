@@ -1,17 +1,16 @@
 import hashlib
-filename = 'MappedCombined_mayoclinic.txt'
-path = '/home/hamid/Desktop/ScalableAndReliableDistributedSystems/assignment3/mapper/' + filename
+filename = 'MappedCombined_mayoclinic_part2.txt'
+path = '/home/hamid/Desktop/ScalableAndReliableDistributedSystems/assignment3/managerSplitterMapperReducer/' + filename
 # Number of reducer servers:
 reducers_count = 3
 
-# Convert file back into a dictionary..translate({ord(i): None for i in ',><'})
+# Convert file back into a dictionary.
 dictionary = {}
 with open(path) as f:
 	for line in f:
 		(key, val) = line.translate({ord(i): None for i in ',><'}).split()
 		dictionary[key] = int(val)
 
-print(dictionary)
 	
 # Hashing keys in the dictionary using SHA-1 and modulo calculating.
 # A list of server (reducer) number, word, number of occurrence
@@ -25,5 +24,8 @@ for the_key, the_value in dictionary.items():
 
 print(mod_hashed_list)
 
-	
+# Save to file.
+with open("MappedCombinedPartitioned_" + filename, "w") as f:
+    for line in mod_hashed_list:
+        f.write(f"{line}\n")
 

@@ -1,7 +1,7 @@
 from collections import Counter
 
-filename = 'mayoclinic.txt'
-path = '/home/hamid/Desktop/ScalableAndReliableDistributedSystems/assignment3/mapper/mapperInput/' + filename
+filename = 'mayoclinic_part2.txt'
+path = '/home/hamid/Desktop/ScalableAndReliableDistributedSystems/assignment3/managerSplitterMapperReducer/mapperInput/' + filename
 
 # Mapping.
 with open(path, 'r') as f:
