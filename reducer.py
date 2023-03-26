@@ -9,6 +9,9 @@ reducer_server_number = sys.argv[1]
 
 
 input_list = []
+# Reading all triples (reducer_server, key, value) from files with the same name
+# beginnings from current directory, selecting key values allocated to this reducer,
+# and putting them all in a list: input_list.
 list_of_files = glob.glob('./MappedCombinedPartitioned*.txt')
 for file_name in list_of_files:
 	f_handle = open(file_name, 'r')
@@ -20,7 +23,7 @@ for file_name in list_of_files:
 			
 	f_handle.close()
 
-
+# Reducing (adding up values) of input_list and putting into output_dict.
 output_dict = {}
 i = 0
 while i < len(input_list):
@@ -30,16 +33,14 @@ while i < len(input_list):
 	while j < len(input_list):
 
 		if input_list[i][0] == input_list[j][0]:
-
 			sum_value += int(input_list[j][1])
-
+			del input_list[j]
 		j += 1
 		
-	print(sum_value)
 	output_dict[input_list[i][0]] = sum_value
 	i += 1
 
-#print(output_dict)
+print(output_dict)
 
 # Save into file.
 f = open("MappedCombinedPartitionedReduced.txt", "w")
