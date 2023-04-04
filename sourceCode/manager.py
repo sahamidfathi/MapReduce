@@ -1,6 +1,27 @@
+
+
+# splitting
+import sys
+
+# number of files should be equal to the number of servers
+number_of_files = 3
+file_name = sys.argv[1]
+with open(file_name) as infp:
+    files = [open(file_name.replace(".txt","_part") + '%d.txt' % i, 'w') for i in range(number_of_files)]
+    for i, line in enumerate(infp):
+        files[i % number_of_files].write(line)
+    for f in files:
+        f.close()
+        
+        
+# send files to vms
+
+# send script to vm for mapper
+
+# combiner should not be in mapper, should be in shuffle 
 import hashlib
 filename = 'MappedCombined_mayoclinic_part2.txt'
-path = '/home/hamid/Desktop/ScalableAndReliableDistributedSystems/assignment3/managerSplitterMapperReducer/' + filename
+path = '/home/hamid/Desktop/ScalableAndReliableDistributedSystems/assignment3/toShareOnGitHub/' + filename
 # Number of reducer servers:
 reducers_count = 3
 
