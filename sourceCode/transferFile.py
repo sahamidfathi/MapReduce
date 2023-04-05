@@ -50,9 +50,9 @@ class SSHConnection(object):
 if __name__ == "__main__":
     host = "cs4459-vm1.gaul.csd.uwo.ca"
     username = "sfathi4"
-    pw = "***********"
+    pw = "*"
     
-    origin = '/home/hamid/Desktop/ScalableAndReliableDistributedSystems/assignment3/filesToBeTransferred/mayoclinic.txt'
+    origin = '../inputFile/*_part.txt'
     dst = '/home/sfathi4/serverFiles/mayoclinic.txt'
     
     ssh = SSHConnection(host, username, pw)
