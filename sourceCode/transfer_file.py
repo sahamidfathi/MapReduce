@@ -1,4 +1,5 @@
 import sys
+import os
 import paramiko
 import glob
 
@@ -50,12 +51,29 @@ class SSHConnection(object):
 		self.transport.close()
         
 if __name__ == "__main__":
-	host = sys.argv[3] #"cs4459-vm1.gaul.csd.uwo.ca" #
-	username = sys.argv[4] #"sfathi4" #
-	pw = sys.argv[5] #"**"#
- 
-	origin = glob.glob('./inputFile/*part' + sys.argv[2] + '*')[0]
-	dst = '/home/' + username + '/Documents/' + sys.argv[1] + '_part' + sys.argv[2] + '.txt'
+
+	#print("inside transf")
+	#print(sys.argv[1])
+	#print(sys.argv[2])
+	#print(sys.argv[3])
+	#print(sys.argv[4])
+	#print(sys.argv[5])
+	#print(sys.argv[6])
+	
+	print("File being transferred from ...")
+	print(sys.argv[2])
+	print("of the current server, to ...")
+	print(sys.argv[3])
+	print("of ...")
+	print(sys.argv[4])
+	print()
+
+	host = sys.argv[4] #"cs4459-vm1.gaul.csd.uwo.ca" #
+	username = sys.argv[5] #"sfathi4" #
+	pw = sys.argv[6] #"**"#
+	
+	origin = glob.glob(sys.argv[2])[0]
+	dst = sys.argv[3] 
     
 	ssh = SSHConnection(host, username, pw)
 	ssh.put(origin, dst)
