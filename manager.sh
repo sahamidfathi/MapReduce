@@ -73,6 +73,24 @@ do
 	done
 done
 
+# Run reducer on shuffled files.
+for ((i=1;i<=$servers_count;i++))
+do
+	vm_name="cs4459-vm${i}.gaul.csd.uwo.ca"
+	sshpass -p ${vm_passwrd} ssh -o StrictHostKeyChecking=no \
+		${vm_usr_name}@${vm_name} python -u - --opt ${i} \
+		${vm_usr_name} < ./sourceCode/reducer.py 
+done
+
+# Sort alphabetically.
+for ((i=1;i<=$servers_count;i++))
+do
+	vm_name="cs4459-vm${i}.gaul.csd.uwo.ca"
+	sshpass -p ${vm_passwrd} ssh -o StrictHostKeyChecking=no \
+		${vm_usr_name}@${vm_name} python -u - --opt \
+		${vm_usr_name} < ./sourceCode/sorter.py 
+done
+
 # Delete file chunks.
 #echo $(ls ./inputFile/)
 find ./inputFile/ -type f -not -name ${file_name} -delete
